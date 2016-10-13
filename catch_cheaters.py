@@ -3,6 +3,9 @@ import os
 import json
 import sys
 
+
+save_file = 'results.txt'
+
 if len(sys.argv) != 2:
 	print 'Usage: ' + sys.argv[0] + ' <submissions.zip>'
 	exit(1)
@@ -16,7 +19,6 @@ if save_file in o.split('\n'):
 	print save_file + ' already exists. Please remove this file and try again.'
 	exit(1)
 
-save_file = 'results.txt'
 
 # Store the student's projectID as the key with a list of projects that have the same ID
 project_IDs = {}
@@ -45,4 +47,9 @@ for filename in o.split('\n'):
 		project_lengths[count] = []
 	project_lengths[count].append(student_dir)
 
-with open(save_file, 'w')
+filter_projects = lambda x: {k:v for k,v in x.iteritems() if len(v) > 1}
+cheated_projects = filter_projects(project_IDs)
+suspicious_projects = filter_projects(project_lengths)
+with open(save_file, 'w') as save:
+	save.write(cheated_projects)
+	save.write(suspicious_projects)
