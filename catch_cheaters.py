@@ -51,5 +51,13 @@ filter_projects = lambda x: {k:v for k,v in x.iteritems() if len(v) > 1}
 cheated_projects = filter_projects(project_IDs)
 suspicious_projects = filter_projects(project_lengths)
 with open(save_file, 'w') as save:
-	save.write(cheated_projects)
-	save.write(suspicious_projects)
+	save.write('Projects with the same projectID:')
+	save.write('\n\n')
+	save.write(json.dumps(cheated_projects, sort_keys=True, indent=4, separators=(',', ': ')))
+	save.write('\n\n')
+	save.write('Projects with the same length project:')
+	save.write('\n\n')
+	save.write(json.dumps(suspicious_projects, sort_keys=True, indent=4, separators=(',', ': ')))
+
+print
+print 'Done.'
