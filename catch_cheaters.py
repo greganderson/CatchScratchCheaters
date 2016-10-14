@@ -85,4 +85,4 @@ with open(save_file, 'w') as save:
 	save.write(json.dumps(suspicious_projects, sort_keys=True, indent=4, separators=(',', ': ')))
 
 print
-print 'Done.'
+print 'Done. Output stored in ' + save_file + '.'
